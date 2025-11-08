@@ -1,0 +1,376 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Inter', sans-serif;
+}
+
+body {
+  background: linear-gradient(180deg, #000 0%, #0b0b0b 40%, #121212 100%);
+  color: white;
+}
+
+/* --- Main Container --- */
+.container {
+  height: 100vh;
+  overflow: hidden; /* Prevent whole page scroll */
+  gap: 5px; /* Space between left/right divs */
+}
+
+/* --- SIDEBAR --- */
+.left {
+  width: 24vw;
+  /* MODIFIED: Removed padding, added height and flex */
+  padding: 0; 
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  gap: 8px; /* Space between home/library blocks */
+}
+.logo img {
+  width: 110px;
+}
+
+.home {
+  padding: 10px; /* Added padding here */
+}
+
+.home ul li {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 10px 0;
+  color: #b3b3b3;
+  font-size: 15px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: 0.3s;
+}
+.home ul li img {
+  width: 22px;
+}
+.home ul li:hover {
+  color: white;
+}
+
+/* LIBRARY */
+.library {
+  /* MODIFIED: Added flex properties */
+  padding: 10px; /* Added padding here */
+  flex-grow: 1; /* Fill remaining vertical space */
+  display: flex;
+  flex-direction: column;
+  overflow: hidden; /* Contain the scrolling */
+}
+
+.heading {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 14px;
+  margin: 15px 0;
+}
+.heading img {
+  width: 22px;
+}
+
+.library-cards {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 15px;
+}
+.lib-card {
+  background: #181818;
+  border-radius: 8px;
+  padding: 10px;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+.lib-card:hover {
+  background: #252525;
+}
+.lib-info h3 {
+  font-size: 14px;
+  margin-bottom: 4px;
+}
+.lib-info p {
+  color: #b3b3b3;
+  font-size: 12px;
+}
+
+/* --- Song List in Library --- */
+.songList {
+  flex-grow: 1; 
+  overflow-y: auto;
+  margin-top: 15px;
+}
+
+/* --- UPDATED SONG LIST STYLES --- */
+.songList ul {
+    padding: 0; /* Removed default padding */
+}
+.songList ul li {
+    list-style-type: none; /* Removed decimal numbers */
+    display: flex;
+    align-items: center; /* Vertically center items */
+    justify-content: space-between;
+    gap: 10px; /* Spacing between items */
+    cursor: pointer;
+    border: 1px solid #2a2a2a; /* Subtle border */
+    margin-bottom: 8px; /* Space between cards */
+    padding: 10px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+.songList ul li:hover {
+    background-color: #252525;
+}
+
+.songList .info {
+    flex-grow: 1; /* Take available space */
+    margin: 0 10px; /* Space from icon */
+    font-size: 13px;
+    width: auto; /* Removed fixed width */
+}
+.songList .info div:first-child {
+    color: white;
+    font-weight: 500;
+    font-size: 14px;
+    margin-bottom: 4px;
+    word-break: break-all;
+}
+.songList .info div:last-child {
+    color: #b3b3b3;
+    font-size: 12px;
+}
+
+.playnow {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px; /* Space between text and icon */
+    padding-right: 10px;
+}
+.playnow span {
+    font-size: 14px; /* Adjusted font size */
+    color: #b3b3b3;
+    font-weight: 500;
+    /* Removed fixed width and padding */
+}
+.songList ul li:hover .playnow span {
+    color: white;
+}
+/* --- END OF UPDATED STYLES --- */
+
+
+/* --- MAIN SECTION --- */
+.right {
+  width: 76vw;
+  background: #181818;
+  border-radius: 10px;
+  overflow: hidden;
+  margin-left: 0; 
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+/* --- NEW: Main Content Scroll Wrapper --- */
+.main-content {
+  flex-grow: 1; /* Take remaining space */
+  overflow-y: auto; /* Make this area scrollable */
+  padding-bottom: 100px; /* Space for the fixed playbar */
+}
+
+
+/* HEADER */
+.header {
+  display: flex;
+  align-items: center;
+  padding: 15px 20px;
+  background: #202020;
+  border-bottom: 1px solid #2a2a2a;
+  position: sticky;
+  top: 0;
+  z-index: 1;
+}
+
+/* NEW: Style for .nav */
+.nav {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+
+/* GREETING SECTION - MODIFIED */
+.welcome {
+  /* Removed padding */
+}
+.welcome h2 {
+  font-size: 18px; /* Made it a bit smaller for the header */
+  margin-bottom: 0;
+  font-weight: 500;
+}
+/* ADDED: Style for the new <p> tag */
+.welcome p {
+  color: #b3b3b3;
+  font-size: 14px;
+  margin-top: 5px;
+}
+
+/* PLAYLIST CARDS */
+.spotifyPlaylists {
+  padding: 20px;
+}
+.spotifyPlaylists h1 {
+  font-size: 20px;
+  margin-bottom: 15px;
+}
+.cardContainer {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+.card {
+  width: 180px;
+  background: #202020;
+  padding: 12px;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+}
+.card:hover {
+  background: #2a2a2a;
+  transform: translateY(-4px);
+}
+.card img {
+  width: 100%;
+  border-radius: 6px;
+}
+.card h2 {
+  font-size: 15px;
+  margin-top: 8px;
+}
+.card p {
+  font-size: 13px;
+  color: #b3b3b3;
+}
+
+/* --- PLAYBAR --- */
+.playbar {
+  position: fixed;
+  bottom: 25px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 72vw;
+  background: #181818;
+  border-radius: 12px;
+  padding: 10px 16px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+  z-index: 10; /* Make sure it's on top */
+}
+.seekbar {
+  height: 3px;
+  background: #555;
+  border-radius: 4px;
+  margin-bottom: 8px;
+  cursor: pointer; /* Added cursor */
+}
+.circle {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #1ed760;
+  position: relative;
+  bottom: 4px;
+  transition: left 0.1s linear; /* Added transition */
+}
+
+/* Play Controls */
+.abovebar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.songbuttons img {
+  cursor: pointer;
+  transition: 0.2s;
+}
+.songbuttons img:hover {
+  transform: scale(1.1);
+}
+.songinfo {
+  font-size: 14px;
+  color: #fff;
+  width: 250px; /* Give it some space */
+  word-break: break-all;
+}
+.songtime {
+  font-size: 12px;
+  color: #b3b3b3;
+}
+.timevol {
+  display: flex; /* Added */
+  align-items: center; /* Added */
+  gap: 15px; /* Added */
+}
+.volume {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.range input {
+  cursor: pointer;
+}
+
+/* RESPONSIVE */
+@media (max-width: 1200px) {
+  .left {
+    position: absolute;
+    left: -120%;
+    background: #000;
+    width: 320px;
+    height: 100vh;
+    z-index: 10;
+    transition: 0.3s ease;
+  }
+  
+  /* ADDED: Hamburger display */
+  .hamburger {
+    display: block; /* Show hamburger on smaller screens */
+  }
+  .hamburgerContainer {
+    display: block; /* Make sure it's visible */
+  }
+  .close {
+    display: block; /* Show close button inside sidebar */
+    position: absolute;
+    right: 20px;
+    top: 20px;
+  }
+  .right {
+    width: 100vw; /* Right side takes full width */
+  }
+  .playbar {
+    width: 90vw; /* Make playbar wider */
+  }
+}
+
+/* Added hamburger display block */
+.hamburger{
+    display: none;
+}
+.hamburgerContainer{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 14px;
+}
+
+/* Added close button display none for desktop */
+.close{
+    display: none;
+}
