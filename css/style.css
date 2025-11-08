@@ -228,9 +228,9 @@ body {
   /* Removed padding */
 }
 .welcome h2 {
-  font-size px; /* Made it a bit smaller for the header */
+  font-size:29px; /* Made it a bit smaller for the header */
   margin-bottom: 0;
-  font-family: "Indie Flower", cursive;
+  
   font-weight: 900;
 }
 /* ADDED: Style for the new <p> tag */
@@ -245,23 +245,20 @@ body {
   padding: 20px;
 }
 .spotifyPlaylists h1 {
-  font-family: "Playwrite MX Guides", cursive;
-    font-size: 25px;
+  
+    font-size: 20px;
     font-weight: 500;
+     margin-bottom: 15px;
   
 }
-.spotifyPlaylists h2{
-  
-  font-size:20px;
-  margin-bottom: 15px;
-}
+
 .cardContainer {
   display: flex;
   flex-wrap: wrap;
   gap: 20px;
 }
 .card {
-  width: 180px;
+  width: 250px;
   background: #202020;
   padding: 12px;
   border-radius: 8px;

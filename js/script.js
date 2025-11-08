@@ -9,7 +9,10 @@ const folderSongs = {
     "O mere Dil ke": ["O mere dil ke chain.mp3"],
     "Lag ja Gale": ["lag ja gale.mp3"],
     "karan aujla": ["For A Reason (Official Video) Karan Aujla  Tania   Ikky  Latest Punjabi Songs 2025 - Rehaan Records.mp3"],
-    "Señorita - Shawn Mendes": ["Señorita - Shawn Mendes.mp3"]
+    "Señorita - Shawn Mendes": ["Señorita - Shawn Mendes.mp3"],
+    "Main Rang Sharbaton ka": ["Main Rang Sharbaton ka.mp3"],
+    // --- NEW PLAYLIST ADDED ---
+    "Teri Deewani": ["Teri Deewani.mp3"] 
 };
 
 
@@ -94,8 +97,8 @@ async function displayAlbums() {
     console.log("displaying albums")
     let cardContainer = document.querySelector(".cardContainer")
 
-    // UPDATED list of your 5 folders
-    let folders = ["Kiliye Kiliye", "O mere Dil ke", "Lag ja Gale", "karan aujla", "Señorita - Shawn Mendes"];
+    // UPDATED list of your folders to include the new one
+    let folders = ["Kiliye Kiliye", "O mere Dil ke", "Lag ja Gale", "karan aujla", "Señorita - Shawn Mendes", "Main Rang Sharbaton ka", "Teri Deewani"];
 
     // Loop through the array
     for (const folder of folders) { 
