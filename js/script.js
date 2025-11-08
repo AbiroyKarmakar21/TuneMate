@@ -2,6 +2,7 @@ console.log('Lets write JavaScript');
 let currentSong = new Audio();
 let songs; // This will hold the list of songs for the *currently* loaded playlist
 let currFolder;
+let lastVolume = 1.0; // --- FIX: Added to remember volume before mute ---
 
 // This list is now UPDATED with all your playlists and their .mp3 files
 const folderSongs = {
@@ -10,7 +11,7 @@ const folderSongs = {
     "Lag ja Gale": ["lag ja gale.mp3"],
     "karan aujla": [
         "For A Reason (Official Video) Karan Aujla  Tania   Ikky  Latest Punjabi Songs 2025 - Rehaan Records.mp3",
-        "Wavy Karan Aujla.mp3" // <-- ADDED THIS NEW SONG
+        "Wavy Karan Aujla.mp3"
     ],
     "Señorita - Shawn Mendes": ["Señorita - Shawn Mendes.mp3"],
     "Main Rang Sharbaton ka": ["Main Rang Sharbaton ka.mp3"],
@@ -186,8 +187,12 @@ async function main() {
 
     // Attach an event listener to play, next and previous
     play.addEventListener("click", () => {
-        if (!currentSong.src) {
+        if (!currentSong.src || currentSong.src.endsWith("/")) { // Check if src is empty or just the base path
             console.warn("No song loaded.");
+            // Optionally play the first song of the current list
+            if (songs && songs.length > 0) {
+                playMusic(songs[0]);
+            }
             return;
         }
         if (currentSong.paused) {
@@ -225,12 +230,21 @@ async function main() {
         document.querySelector(".left").style.left = "-120%"
     })
 
-    // Add an event listener to previous
+    // --- FIX: PREVIOUS BUTTON LOGIC ---
     previous.addEventListener("click", () => {
         if (!currentSong.src || !songs || songs.length === 0) return;
         currentSong.pause()
         console.log("Previous clicked")
-        let index = songs.indexOf(currentSong.src.split("/").slice(-1)[0])
+
+        // Decode the track name from the full URL source
+        let currentTrack = decodeURI(currentSong.src.split("/").pop())
+        let index = songs.indexOf(currentTrack)
+
+        if (index === -1) {
+             console.warn("Could not find current song in list:", currentTrack);
+             playMusic(songs[0]); // Fallback to first song
+             return;
+        }
         
         if ((index - 1) < 0) {
             // If at the beginning, loop to the end
@@ -240,13 +254,21 @@ async function main() {
         }
     })
 
-    // Add an event listener to next
+    // --- FIX: NEXT BUTTON LOGIC ---
     next.addEventListener("click", () => {
         if (!currentSong.src || !songs || songs.length === 0) return;
         currentSong.pause()
         console.log("Next clicked")
 
-        let index = songs.indexOf(currentSong.src.split("/").slice(-1)[0])
+        // Decode the track name from the full URL source
+        let currentTrack = decodeURI(currentSong.src.split("/").pop())
+        let index = songs.indexOf(currentTrack)
+
+        if (index === -1) {
+             console.warn("Could not find current song in list:", currentTrack);
+             playMusic(songs[0]); // Fallback to first song
+             return;
+        }
 
         if ((index + 1) >= songs.length) {
             // If at the end, loop to the beginning
@@ -256,26 +278,36 @@ async function main() {
         }
     })
 
-    // Add an event to volume
-    document.querySelector(".range").getElementsByTagName("input")[0].addEventListener("change", (e) => {
+    // --- FIX: VOLUME SLIDER (use 'input' for real-time update) ---
+    document.querySelector(".range").getElementsByTagName("input")[0].addEventListener("input", (e) => {
+        let newVolume = parseInt(e.target.value) / 100;
         console.log("Setting volume to", e.target.value, "/ 100") 
-        currentSong.volume = parseInt(e.target.value) / 100
-        if (currentSong.volume >0){
-            document.querySelector(".volume>img").src = document.querySelector(".volume>img").src.replace("mute.svg", "volume.svg")
+        currentSong.volume = newVolume;
+        
+        // Also update the mute icon
+        if (newVolume === 0) {
+            document.querySelector(".volume>img").src = "img/mute.svg";
+        } else {
+            document.querySelector(".volume>img").src = "img/volume.svg";
         }
     })
 
-    // Add event listener to mute the track
+    // --- FIX: MUTE BUTTON (remembers last volume) ---
     document.querySelector(".volume>img").addEventListener("click", e=>{ 
-        if(e.target.src.includes("volume.svg")){
-            e.target.src = e.target.src.replace("volume.svg", "mute.svg")
+        if(currentSong.volume > 0){
+            // MUTE
+            lastVolume = currentSong.volume; // Store the current volume
+            e.target.src = "img/mute.svg";
             currentSong.volume = 0;
             document.querySelector(".range").getElementsByTagName("input")[0].value = 0;
         }
         else{
-            e.target.src = e.target.src.replace("mute.svg", "volume.svg")
-            currentSong.volume = .10;
-            document.querySelector(".range").getElementsByTagName("input")[0].value = 10;
+            // UNMUTE
+            // Restore to the last volume (or 1.0 if lastVolume was 0)
+            let restoreVolume = lastVolume > 0 ? lastVolume : 1.0;
+            e.target.src = "img/volume.svg";
+            currentSong.volume = restoreVolume;
+            document.querySelector(".range").getElementsByTagName("input")[0].value = restoreVolume * 100;
         }
 
     })
