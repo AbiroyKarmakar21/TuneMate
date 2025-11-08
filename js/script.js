@@ -3,16 +3,23 @@ let currentSong = new Audio();
 let songs; // This will hold the list of songs for the *currently* loaded playlist
 let currFolder;
 
-// This list is now UPDATED with your new 5 playlists and their .mp3 files
+// This list is now UPDATED with all your playlists and their .mp3 files
 const folderSongs = {
     "Kiliye Kiliye": ["Kiliye Kiliye.mp3"],
     "O mere Dil ke": ["O mere dil ke chain.mp3"],
     "Lag ja Gale": ["lag ja gale.mp3"],
-    "karan aujla": ["For A Reason (Official Video) Karan Aujla  Tania   Ikky  Latest Punjabi Songs 2025 - Rehaan Records.mp3"],
+    "karan aujla": [
+        "For A Reason (Official Video) Karan Aujla  Tania   Ikky  Latest Punjabi Songs 2025 - Rehaan Records.mp3",
+        "Wavy Karan Aujla.mp3" // <-- ADDED THIS NEW SONG
+    ],
     "Señorita - Shawn Mendes": ["Señorita - Shawn Mendes.mp3"],
     "Main Rang Sharbaton ka": ["Main Rang Sharbaton ka.mp3"],
-    // --- NEW PLAYLIST ADDED ---
-    "Teri Deewani": ["Teri Deewani.mp3"] 
+    "Teri Deewani": ["Teri Deewani.mp3"],
+    // --- NEW PLAYLISTS ADDED ---
+    "Itna na mujhse tu pyar badha": ["Itna na mujhse tu pyar badha.mp3"],
+    "Sahiba": ["Sahiba.mp3"],
+    "Chikni Chameli": ["Chikni Chameli.mp3"],
+    "Jalebi Bai": ["Jalebi Bai.mp3"]
 };
 
 
@@ -97,8 +104,21 @@ async function displayAlbums() {
     console.log("displaying albums")
     let cardContainer = document.querySelector(".cardContainer")
 
-    // UPDATED list of your folders to include the new one
-    let folders = ["Kiliye Kiliye", "O mere Dil ke", "Lag ja Gale", "karan aujla", "Señorita - Shawn Mendes", "Main Rang Sharbaton ka", "Teri Deewani"];
+    // UPDATED list of all your folders
+    let folders = [
+        "Kiliye Kiliye", 
+        "O mere Dil ke", 
+        "Lag ja Gale", 
+        "karan aujla", 
+        "Señorita - Shawn Mendes", 
+        "Main Rang Sharbaton ka", 
+        "Teri Deewani",
+        // --- NEW FOLDERS ADDED ---
+        "Itna na mujhse tu pyar badha",
+        "Sahiba",
+        "Chikni Chameli",
+        "Jalebi Bai"
+    ];
 
     // Loop through the array
     for (const folder of folders) { 
